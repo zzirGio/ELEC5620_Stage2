@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Company Reviews{% endblock %}
+
+{% block content %}
+    <h1>Company Reviews</h1>
+    <p>Hi {{ user.username }}! </p>
+
+    <div>
+        <h4>Good Company</h4>
+        <p>by: <strong>User 1</strong></p>
+    </div>
+
+    <div>
+        <h4>Great Products!</h4>
+        <p>by: <strong>User 2</strong></p>
+    </div>
+
+    <div>
+        <h4>Bad Company</h4>
+        <p>by: <strong>User 3</strong></p>
+    </div>
+
+  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+{% endblock %}

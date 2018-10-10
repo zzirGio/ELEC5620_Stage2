@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Company Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Company Dashboard</h1>
+    <p>Hi {{ user.username }}!</p>
+
+    <a href="{% url 'company_reviews' %}"><button>Reviews</button></a>
+    <a href="{% url 'company_analyse' %}"><button>View Sentiment Analysis</button></a>
+
+
+
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% endblock %}

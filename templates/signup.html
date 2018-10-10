@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <h1>Sign up for an account</h1>
+
+    <h3>Select below the type of account you want to create</h3>
+
+    <ul>
+        <li>
+            <a href="{%  url 'company_signup' %}">I'm a Company</a>
+        </li>
+        <li onclick="alert('not implemented!')">
+            <a href="">I'm a Customer</a>
+        </li>
+        <li onclick="alert('not implemented!')">
+            <a href="">I'm a Investor</a>
+        </li>
+    </ul>
+{% endblock %}
