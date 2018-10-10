@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'daintree.apps.DaintreeConfig',
-    'investor.apps.InvestorConfig',
     'company.apps.CompanyConfig',
     'customer.apps.CustomerConfig',
+    'investor.apps.InvestorConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +79,15 @@ WSGI_APPLICATION = 'ELEC5620_Stage2.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'daintree',
+            'USER': 'admin',
+            'PASSWORD': 'daintree',
+            'HOST': 'aa7r0gga1jjmly.cu45zsuflhj5.us-east-2.rds.amazonaws.com',
+            'PORT': '3306',
+        }
     }
-}
 
 
 # Password validation
@@ -123,3 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+LOGIN_REDIRECT_URL = 'logged_in'
+LOGOUT_REDIRECT_URL = 'home'
+
+AUTH_USER_MODEL = 'daintree.User'

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Company Sentiment Analysis{% endblock %}
+
+{% block content %}
+    <h1>Company Sentiment Analysis</h1>
+
+    <h2>Overall sentiment: 75%</h2>
+    <h3>Your company is viewed positively!</h3>
+
+    <p>based on the following reviews:</p>
+    <ul>
+        <li><strong>Good Company</strong> | User 1</li>
+        <li><strong>Great Products</strong> | User 2</li>
+        <li><a href="{% url 'company_reviews' %}">View all</a></li>
+    </ul>
+
+  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+{% endblock %}
