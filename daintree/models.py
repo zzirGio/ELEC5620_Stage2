@@ -8,6 +8,11 @@ class UserTypes:
     INVESTOR = 3
 
 
+class ReviewTypes:
+    COMPANY = 1
+    PRODUCT = 2
+
+
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
         (UserTypes.COMPANY, 'company'),
@@ -29,3 +34,40 @@ class Company(models.Model):
     nb_employees = models.IntegerField(default=0)
     owner = models.CharField(max_length=255)
     ethereum_pk = models.CharField(max_length=255, null=True, blank=True)
+
+    def get_products(self):
+        return Product.objects.filter(company=self.id)
+
+    def get_reviews(self):
+        return Review.objects.filter(company=self.id)
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return u'{0}'.format(self.name)
+
+
+class Product(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    stock = models.IntegerField()
+    price = models.FloatField()
+
+    def get_reviews(self):
+        return Review.objects.filter(product=self.id)
+
+
+class Review(models.Model):
+    REVIEW_TYPE_CHOICES = (
+        (ReviewTypes.COMPANY, 'company'),
+        (ReviewTypes.PRODUCT, 'product'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
+    content = models.CharField(max_length=1024)
+    review_type = models.PositiveSmallIntegerField(choices=REVIEW_TYPE_CHOICES)

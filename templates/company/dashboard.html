@@ -6,10 +6,11 @@
     <h1>Company Dashboard</h1>
     <p>Hi {{ user.username }}!</p>
 
-    <a href="{% url 'company_reviews' %}"><button>Reviews</button></a>
-    <a href="{% url 'company_analyse' %}"><button>View Sentiment Analysis</button></a>
-
-
+    <ul>
+        <li><a href="{% url 'company_reviews' %}"><button>Reviews</button></a></li>
+        <li><a href="{% url 'company_analyse' %}"><button>View Sentiment Analysis</button></a></li>
+        <li><a href="{% url 'company_add_product' %}"><button>Add Product</button></a></li>
+    </ul>
 
   <p><a href="{% url 'logout' %}">logout</a></p>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+    <h1>Product successfully added!</h1>
+
+    <ul>
+        <li><a href="{% url 'company_dashboard' %}"><button>Back to dashboard</button></a></li>
+        <li><a href="{% url 'company_add_product' %}"><button>Add another product</button></a></li>
+    </ul>
+
+{% endblock %}
