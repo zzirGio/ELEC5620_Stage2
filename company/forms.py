@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from daintree.models import User
 from django.db import transaction
 
-from daintree.models import Company, UserTypes
+from daintree.models import Company, UserTypes, Category, Product
 
 
 class CompanySignUpForm(UserCreationForm):
@@ -33,3 +33,22 @@ class CompanySignUpForm(UserCreationForm):
             company.save()
 
         return user
+
+
+class AddProductForm(forms.ModelForm):
+    name = forms.CharField(max_length=255)
+    stock = forms.IntegerField(min_value=0)
+    price = forms.FloatField()
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+    # company = forms.HiddenInput()
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+        exclude = ['company']
+
+    def get_category_name(self):
+        try:
+            return Category.objects.get(id=self.initial['category']).name
+        except:
+            return None
