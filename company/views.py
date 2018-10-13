@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .decorators import company_user_required
 from .forms import CompanySignUpForm, AddProductForm, UpdateProductForm
-from daintree.models import User, Product, Company, Review
+from daintree.models import User, Product, Company, SentimentAnalysis
 
 
 class SignUpView(generic.CreateView):
@@ -39,6 +39,18 @@ class CompanyReviewsView(generic.TemplateView):
 @method_decorator([login_required, company_user_required], name='dispatch')
 class AnalyseCompanyView(generic.TemplateView):
     template_name = 'company/sentiment_analysis_results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company = Company.objects.get(user=self.request.user)
+        reviews = company.get_reviews()
+        sentiment_analysis = SentimentAnalysis()
+        sentiment_result = sentiment_analysis.analyse(reviews)
+        context['num_reviews'] = len(reviews)
+        context['reviews'] = reviews[0:2]
+        context['sentiment'] = sentiment_result.sentiment
+        context['confidence'] = sentiment_result.confidence
+        return context
 
 
 @method_decorator([login_required, company_user_required], name='dispatch')
@@ -98,5 +110,23 @@ def product_reviews_view(request, id=None):
     reviews = product.get_reviews()
 
     return render(request, 'company/reviews.html', context={'reviews': reviews})
+
+
+@login_required
+@company_user_required
+def product_analyse_view(request, id=None):
+    product = get_object_or_404(Product, id=id)
+    reviews = product.get_reviews()
+
+    sentiment_analysis = SentimentAnalysis()
+    sentiment_result = sentiment_analysis.analyse(reviews)
+
+    data = {
+        'num_reviews': len(reviews),
+        'reviews': reviews[0:2],
+        'sentiment': sentiment_result.sentiment,
+        'confidence': sentiment_result.confidence
+    }
+    return render(request, 'company/sentiment_analysis_results.html', context=data)
 
 
