@@ -22,6 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'bl1pvt=rxwg$-*(32pg*0t4tnv^y*wz$nn@qgbw^x4x964-gy@'
 
+AYLIEN_APP_ID = '15b6305a'
+AYLIEN_KEY = '7b54a8e4e515fe268f7fd3c29e672a86'
+AYLIEN_ENDPOINT = 'https://api.aylien.com/api/v1'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

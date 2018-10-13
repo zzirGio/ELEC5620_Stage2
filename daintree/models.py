@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from aylienapiclient import textapi
 
 class UserTypes:
     COMPANY = 1
@@ -81,3 +83,22 @@ class Review(models.Model):
 
     def __str__(self):
         return u'{}, {}, {}'.format(self.content, self.review_type, self.company)
+
+
+class SentimentResult:
+    def __init__(self, sentiment='Neutral', confidence=0.0):
+        self.sentiment = sentiment
+        self.confidence = confidence
+
+
+class SentimentAnalysis():
+    client = textapi.Client(settings.AYLIEN_APP_ID, settings.AYLIEN_KEY)
+
+    def analyse(self, reviews):
+        contents = []
+        for review in reviews:
+            contents.append(review.content)
+
+        sentiment = self.client.Sentiment({'text': ' '.join(contents)})
+
+        return SentimentResult(sentiment['polarity'], sentiment['polarity_confidence'])

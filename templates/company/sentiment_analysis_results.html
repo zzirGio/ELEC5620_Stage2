@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Company Sentiment Analysis{% endblock %}
+{% block title %}Sentiment Analysis{% endblock %}
 
 {% block content %}
     <h1>Company Sentiment Analysis</h1>
 
-    <h2>Overall sentiment: 75%</h2>
-    <h3>Your company is viewed positively!</h3>
+    {% if num_reviews > 0 %}
+        <p><strong>Overall sentiment</strong>: {{ sentiment }}</p>
+        <p><strong>Confidence</strong>: {{ confidence }}</p>
 
-    <p>based on the following reviews:</p>
-    <ul>
-        <li><strong>Good Company</strong> | User 1</li>
-        <li><strong>Great Products</strong> | User 2</li>
-        <li><a href="{% url 'company_reviews' %}">View all</a></li>
-    </ul>
+        <p>based on the following reviews:</p>
+        <ul>
+            {% for r in reviews %}
+            <li><strong>{{ r.content }}</strong></li>
+            {% endfor %}
+            <li><a href="{% url 'company_reviews' %}">View all</a></li>
+        </ul>
+    {% else %}
+        <h2>No reviews to analyse.</h2>
+    {% endif %}
+
 
   <p><a href="{% url 'company_dashboard' %}">back</a></p>
 {% endblock %}
