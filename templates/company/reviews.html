@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}Company Reviews{% endblock %}
+{% block title %}Reviews{% endblock %}
 
 {% block content %}
-    <h1>Company Reviews</h1>
-    <p>Hi {{ user.username }}! </p>
+    <h1>Reviews</h1>
 
-    <div>
-        <h4>Good Company</h4>
-        <p>by: <strong>User 1</strong></p>
-    </div>
-
-    <div>
-        <h4>Great Products!</h4>
-        <p>by: <strong>User 2</strong></p>
-    </div>
-
-    <div>
-        <h4>Bad Company</h4>
-        <p>by: <strong>User 3</strong></p>
-    </div>
+    {% if reviews %}
+        {% for r in reviews %}
+            <div>
+                <p>
+                    <strong>Anonymous:</strong> <br/>
+                    {{ r.content }}
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No reviews to display</p>
+    {% endif %}
 
   <p><a href="{% url 'company_dashboard' %}">back</a></p>
 {% endblock %}

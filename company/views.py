@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .decorators import company_user_required
 from .forms import CompanySignUpForm, AddProductForm, UpdateProductForm
-from daintree.models import User, Product, Company
+from daintree.models import User, Product, Company, Review
 
 
 class SignUpView(generic.CreateView):
@@ -28,6 +28,12 @@ class CompanyDashboardView(generic.TemplateView):
 @method_decorator([login_required, company_user_required], name='dispatch')
 class CompanyReviewsView(generic.TemplateView):
     template_name = 'company/reviews.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company = Company.objects.get(user=self.request.user)
+        context['reviews'] = company.get_reviews()
+        return context
 
 
 @method_decorator([login_required, company_user_required], name='dispatch')
@@ -65,7 +71,6 @@ class ProductsListView(generic.TemplateView):
         return context
 
 
-# @method_decorator([login_required, company_user_required], name='dispatch')
 @login_required
 @company_user_required
 def product_view(request, id=None):
@@ -84,3 +89,14 @@ def product_view(request, id=None):
         form = UpdateProductForm(instance=product)
 
     return render(request, 'company/product.html', context={'form': form, 'product': product})
+
+
+@login_required
+@company_user_required
+def product_reviews_view(request, id=None):
+    product = get_object_or_404(Product, id=id)
+    reviews = product.get_reviews()
+
+    return render(request, 'company/reviews.html', context={'reviews': reviews})
+
+

@@ -12,5 +12,7 @@
       <button type="submit">Submit</button>
     </form>
 
+  <p><a href="{% url 'company_product_reviews' product.id %}"><button>Reviews</button></a></p>
+
   <p><a href="{% url 'company_dashboard' %}">back</a></p>
 {% endblock %}
