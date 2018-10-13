@@ -40,6 +40,26 @@ class AddProductForm(forms.ModelForm):
     stock = forms.IntegerField(min_value=0)
     price = forms.FloatField()
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+    description = forms.CharField(max_length=1024, widget=forms.Textarea, required=False)
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+        exclude = ['company']
+
+    def get_category_name(self):
+        try:
+            return Category.objects.get(id=self.initial['category']).name
+        except:
+            return None
+
+
+class UpdateProductForm(forms.ModelForm):
+    name = forms.CharField(max_length=255)
+    stock = forms.IntegerField(min_value=0)
+    price = forms.FloatField()
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+    description = forms.CharField(max_length=1024, widget=forms.Textarea, required=False)
     # company = forms.HiddenInput()
 
     class Meta:

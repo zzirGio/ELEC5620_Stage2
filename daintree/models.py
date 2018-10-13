@@ -36,10 +36,13 @@ class Company(models.Model):
     ethereum_pk = models.CharField(max_length=255, null=True, blank=True)
 
     def get_products(self):
-        return Product.objects.filter(company=self.id)
+        return Product.objects.filter(company=self)
 
     def get_reviews(self):
-        return Review.objects.filter(company=self.id)
+        return Review.objects.filter(company=self)
+
+    def __str__(self):
+        return u'{}, {}, {}, {}'.format(self.user_id, self.address, self.description, self.owner)
 
 
 class Category(models.Model):
@@ -55,9 +58,13 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     stock = models.IntegerField()
     price = models.FloatField()
+    description = models.CharField(max_length=1024, null=True, blank=True)
 
     def get_reviews(self):
-        return Review.objects.filter(product=self.id)
+        return Review.objects.filter(product=self)
+
+    def __str__(self):
+        return u'{}, {}, {}, {}'.format(self.company, self.name, self.category, self.price)
 
 
 class Review(models.Model):

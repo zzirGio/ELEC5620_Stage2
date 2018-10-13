@@ -7,5 +7,7 @@ urlpatterns = [
     path('reviews/', views.CompanyReviewsView.as_view(), name='company_reviews'),
     path('analyse/', views.AnalyseCompanyView.as_view(), name='company_analyse'),
     path('add_product/', views.AddProductView.as_view(), name='company_add_product'),
-    path('add_product_success/', views.AddProductSuccessView.as_view(), name='company_add_product_success'),
+    path('add_product_success/', views.AddProductSuccessView.as_view(), name='company_product_save_success'),
+    path('products/', views.ProductsListView.as_view(), name='company_products'),
+    path('product/<int:id>', views.product_view, name='company_product'),
 ]

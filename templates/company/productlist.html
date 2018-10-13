@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Company Reviews{% endblock %}
+
+{% block content %}
+    <h1>Company Products</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-inverse">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price ($)</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if products %}
+                {% for p in products %}
+                    <tr>
+                        <td>{{ p.id }}</td>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.stock }}</td>
+                        <td>{{ p.price }}</td>
+                        <td>{{ p.category }}</td>
+                        <td>
+                            <a href="{% url 'company_product' p.id %}">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <th colspan="2" id="no-friends-th">No products to display</th>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+{% endblock %}

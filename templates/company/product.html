@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Company Reviews{% endblock %}
+
+{% block content %}
+    <h1>Product</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="hidden" name="company_id" value="{{ company_id }}"/>
+      <button type="submit">Submit</button>
+    </form>
+
+  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+{% endblock %}

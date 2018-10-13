@@ -3,11 +3,13 @@
 {% block title %}Add Product{% endblock %}
 
 {% block content %}
-<h2>Add Product</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="hidden" name="company_id" value="{{ company_id }}"/>
-  <button type="submit">Submit</button>
-</form>
+  <h2>Add Product</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="company_id" value="{{ company_id }}"/>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p><a href="{% url 'company_dashboard' %}">back</a></p>
 {% endblock %}
