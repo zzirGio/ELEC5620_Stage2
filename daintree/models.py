@@ -39,7 +39,7 @@ class Company(models.Model):
         return Product.objects.filter(company=self)
 
     def get_reviews(self):
-        return Review.objects.filter(company=self)
+        return Review.objects.filter(company=self, review_type=ReviewTypes.COMPANY)
 
     def __str__(self):
         return u'{}, {}, {}, {}'.format(self.user_id, self.address, self.description, self.owner)
@@ -61,7 +61,7 @@ class Product(models.Model):
     description = models.CharField(max_length=1024, null=True, blank=True)
 
     def get_reviews(self):
-        return Review.objects.filter(product=self)
+        return Review.objects.filter(product=self, review_type=ReviewTypes.PRODUCT, company=self.company)
 
     def __str__(self):
         return u'{}, {}, {}, {}'.format(self.company, self.name, self.category, self.price)
@@ -73,8 +73,11 @@ class Review(models.Model):
         (ReviewTypes.PRODUCT, 'product'),
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     content = models.CharField(max_length=1024)
     review_type = models.PositiveSmallIntegerField(choices=REVIEW_TYPE_CHOICES)
+
+    def __str__(self):
+        return u'{}, {}, {}'.format(self.content, self.review_type, self.company)

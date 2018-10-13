@@ -10,4 +10,5 @@ urlpatterns = [
     path('add_product_success/', views.AddProductSuccessView.as_view(), name='company_product_save_success'),
     path('products/', views.ProductsListView.as_view(), name='company_products'),
     path('product/<int:id>', views.product_view, name='company_product'),
+    path('product/<int:id>/reviews/', views.product_reviews_view, name='company_product_reviews'),
 ]
