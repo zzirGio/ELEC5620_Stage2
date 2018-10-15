@@ -29,7 +29,10 @@ AYLIEN_ENDPOINT = 'https://api.aylien.com/api/v1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'daintree-django-env.xxdefraqrs.ap-southeast-2.elasticbeanstalk.com',
+ ]
 
 
 # Application definition
