@@ -1,18 +1,29 @@
-{% extends 'base.html' %}
-
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
 {% block title %}Company Dashboard{% endblock %}
 
-{% block content %}
-    <h1>Company Dashboard</h1>
-    <p>Hi {{ user.username }}!</p>
-
-    <ul>
-        <li><a href="{% url 'company_reviews' %}"><button>Reviews</button></a></li>
-        <li><a href="{% url 'company_analyse' %}"><button>View Sentiment Analysis</button></a></li>
-        <li><a href="{% url 'company_add_product' %}"><button>Add Product</button></a></li>
-        <li><a href="{% url 'company_products' %}"><button>Products</button></a></li>
-        <li><a href="{% url 'company_reviews' %}"><button>Reviews</button></a></li>
-    </ul>
-
-  <p><a href="{% url 'logout' %}">logout</a></p>
+{% block dash_content %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/company/dashboard.css" %}">
+    <div class="dashboard-page">
+        <h1>Company Dashboard</h1>
+        <div class="flex-container task-card-container">
+            <div class="task-card" onclick="location.href = '{% url 'company_add_product' %}';">
+                <span class="fa-icon"><i class="fas fa-plus"></i></span>
+                <p class="title">Add Product</p>
+            </div>
+            <div class="task-card" onclick="location.href = '{% url 'company_products' %}';">
+                <span class="fa-icon"><i class="fas fa-th-list"></i></span>
+                <p class="title">Products</p>
+            </div>
+            <div class="task-card" onclick="location.href = '{% url 'company_reviews' %}';">
+                <span class="fa-icon"><i class="far fa-comment-alt"></i></span>
+                <p class="title">Reviews</p>
+            </div>
+            <div class="task-card" onclick="location.href = '{% url 'company_analyse' %}';">
+                <span class="fa-icon"><i class="fas fa-chart-line"></i></span>
+                <p class="title">Sentiment Analysis</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

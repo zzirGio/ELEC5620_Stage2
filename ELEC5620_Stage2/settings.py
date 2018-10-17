@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     'daintree-django-env.xxdefraqrs.ap-southeast-2.elasticbeanstalk.com',
  ]
 
@@ -134,8 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
 
 LOGIN_REDIRECT_URL = 'logged_in'
 LOGOUT_REDIRECT_URL = 'home'
