@@ -1,0 +1,54 @@
+/* Task card CSS */
+.task-card {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: solid 1px #000000;
+    box-shadow: 0px 0px 5px #0f3420;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+
+    padding-top: 60px;
+}
+
+.task-card .title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 0.67;
+    letter-spacing: normal;
+    padding-bottom: 16px;
+    padding-top: 19px;
+    margin: 0;
+}
+
+.task-card i {
+    color: #0B5C28;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 2em;
+}
+
+/* Dashboard CSS*/
+
+.dashboard-page {
+    max-width: 960px;
+    margin: 100px auto;
+}
+
+.dashboard-page .flex-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.task-card-container {
+    width:100%;
+    margin: 10px;
+}
+
+.task-card-container .task-card {
+    margin: 10px;
+}
