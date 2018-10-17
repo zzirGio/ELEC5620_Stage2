@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
-
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
 {% block title %}Add Product{% endblock %}
 
-{% block content %}
-    <h1>Product successfully saved!</h1>
+{% block dash_content %}
+    <div class="container">
+        <h2>Product successfully saved!</h2>
 
-    <ul>
-        <li><a href="{% url 'company_dashboard' %}"><button>Back to dashboard</button></a></li>
-        <li><a href="{% url 'company_add_product' %}"><button>Add another product</button></a></li>
-    </ul>
+        <a href="{% url 'company_dashboard' %}" class="btn btn-light">Back to dashboard</a>
+        <a href="{% url 'company_dashboard' %}" class="btn btn-primary">Add another product</a>
+    </div>
 
 {% endblock %}
