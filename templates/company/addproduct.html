@@ -1,15 +1,48 @@
-{% extends 'base.html' %}
-
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
 {% block title %}Add Product{% endblock %}
 
-{% block content %}
-  <h2>Add Product</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="company_id" value="{{ company_id }}"/>
-    <button type="submit">Submit</button>
-  </form>
-
-  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+{% block dash_content %}
+    <div class="container">
+        <h2>Add Product</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="fieldWrapper form-group row">
+                {{ form.name.errors }}
+                <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.stock.errors }}
+                <label for="{{ form.stock.id_for_label }}" class="col-sm-2 col-form-label">Stock</label>
+                <div class="col-sm-10">
+                    {{ form.stock }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.price.errors }}
+                <label for="{{ form.price.id_for_label }}" class="col-sm-2 col-form-label">Price ($)</label>
+                <div class="col-sm-10">
+                    {{ form.price }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.category.errors }}
+                <label for="{{ form.category.id_for_label }}" class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10">
+                    {{ form.category }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.description.errors }}
+                <label for="{{ form.description.id_for_label }}" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    {{ form.description }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+    </div>
 {% endblock %}

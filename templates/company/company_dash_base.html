@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block content %}
     <link rel="stylesheet" href="{% static "css/nav.css" %}">
+    <link rel="stylesheet" href="{% static "css/company/base.css" %}">
 
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <!-- Brand/logo -->
@@ -9,11 +10,11 @@
 
         <!-- Links -->
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="{% url 'company_reviews' %}">Reviews</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'company_analyse' %}">View Sentiment Analysis</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'company_dashboard' %}">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'company_add_product' %}">Add Product</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'company_products' %}">Products</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'company_reviews' %}">Reviews</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'company_analyse' %}">Sentiment Analysis</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>

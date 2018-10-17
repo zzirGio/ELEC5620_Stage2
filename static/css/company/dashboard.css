@@ -16,7 +16,7 @@
 .task-card .title {
     font-size: 24px;
     font-weight: 500;
-    line-height: 0.67;
+    line-height: 1;
     letter-spacing: normal;
     padding-bottom: 16px;
     padding-top: 19px;
@@ -33,6 +33,10 @@
 
 .dashboard-page {
     max-width: 960px;
+    margin: 44px auto;
+}
+
+.dashboard-page .task-card-container {
     margin: 100px auto;
 }
 
