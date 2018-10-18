@@ -1,22 +1,54 @@
-{% extends 'base.html' %}
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
+{% block title %}Product Reviews{% endblock %}
 
-{% block title %}Reviews{% endblock %}
+{% block dash_content %}
+    <style>
+        .user_name {
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-{% block content %}
-    <h1>Reviews</h1>
+        .media {
+            margin-top: 15px;
+        }
 
-    {% if reviews %}
-        {% for r in reviews %}
-            <div>
-                <p>
-                    <strong>Anonymous:</strong> <br/>
-                    {{ r.content }}
-                </p>
+        .comments-list .media {
+            border-bottom: 1px dotted #ccc;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="page-header">
+                    <h1>
+                        <small class="float-right">{{ num_reviews }} reviews</small>
+                        Reviews
+                    </h1>
+                </div>
+                <div class="comments-list">
+                    {% if reviews %}
+                        {% for r in reviews %}
+                            <div class="media">
+                                <div class="media-body">
+                                    {% if r.user %}
+                                        <img src="https://picsum.photos/40/40/?random">
+                                        <h4 class="media-heading user_name">{{ r.user.username }}</h4>
+                                    {% else %}
+                                        <img src="https://picsum.photos/g/40/40?image=904">
+                                        <h4 class="media-heading user_name">Anonymous</h4>
+                                    {% endif %}
+                                    {{ r.content }}
+                                    <p></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No reviews to display</p>
+                    {% endif %}
+                </div>
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No reviews to display</p>
-    {% endif %}
+        </div>
 
-  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+    </div>
 {% endblock %}

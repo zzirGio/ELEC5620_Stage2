@@ -109,7 +109,12 @@ def product_reviews_view(request, id=None):
     product = get_object_or_404(Product, id=id)
     reviews = product.get_reviews()
 
-    return render(request, 'company/reviews.html', context={'reviews': reviews})
+    data = {
+        'num_reviews': len(reviews.values_list()),
+        'reviews': reviews,
+    }
+
+    return render(request, 'company/reviews.html', context=data)
 
 
 @login_required
