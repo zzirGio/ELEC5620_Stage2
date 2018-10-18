@@ -1,12 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
+{% block title %}Company Products{% endblock %}
 
-{% block title %}Company Reviews{% endblock %}
+{% block dash_content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-{% block content %}
-    <h1>Company Products</h1>
+    <div class="container">
+        <h2>Company Products</h2>
 
-    <table class="table table-bordered">
-        <thead class="thead-inverse">
+        <table class="table table-striped table-bordered" id="product-table">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -15,8 +19,8 @@
                 <th>Category</th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% if products %}
                 {% for p in products %}
                     <tr>
@@ -35,8 +39,14 @@
                     <th colspan="2" id="no-friends-th">No products to display</th>
                 </tr>
             {% endif %}
-        </tbody>
-    </table>
-
-  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#product-table').DataTable();
+        });
+    </script>
 {% endblock %}
