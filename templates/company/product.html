@@ -1,19 +1,104 @@
-{% extends 'base.html' %}
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
+{% block title %}Product{% endblock %}
 
-{% block title %}Company Reviews{% endblock %}
+{% block dash_content %}
+    <style>
 
-{% block content %}
-    <h1>Product</h1>
+        form {
+            height: 400px;
+        }
 
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="hidden" name="company_id" value="{{ company_id }}"/>
-      <button type="submit">Submit</button>
-    </form>
+        input[disabled], select[disabled], textarea[disabled] {
+            background: #fff;
+            outline: none;
+            border: none;
+            border-width: 0;
+            box-shadow: none;
+            color: #000;
+        }
+    </style>
 
-  <p><a href="{% url 'company_product_reviews' product.id %}"><button>Reviews</button></a></p>
-  <p><a href="{% url 'company_product_analyse' product.id %}"><button>View Sentiment Analysis</button></a></p>
+    <div class="container">
+        <h2>Product</h2>
+        <button type="button" class="btn btn-primary float-right" id="edit-btn">Edit</button>
+        <form method="post">
+            {% csrf_token %}
+            <div class="fieldWrapper form-group row">
+                {{ form.name.errors }}
+                <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10 form-input">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.stock.errors }}
+                <label for="{{ form.stock.id_for_label }}" class="col-sm-2 col-form-label">Stock</label>
+                <div class="col-sm-10 form-input">
+                    {{ form.stock }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.price.errors }}
+                <label for="{{ form.price.id_for_label }}" class="col-sm-2 col-form-label">Price ($)</label>
+                <div class="col-sm-10 form-input">
+                    {{ form.price }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.category.errors }}
+                <label for="{{ form.category.id_for_label }}" class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10 form-input">
+                    {{ form.category }}
+                </div>
+            </div>
+            <div class="fieldWrapper form-group row">
+                {{ form.description.errors }}
+                <label for="{{ form.description.id_for_label }}" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10 form-input">
+                    {{ form.description }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
-  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+        <a class="btn btn-link" href="{% url 'company_product_reviews' product.id %}">Reviews</a>
+        <a class="btn btn-link" href="{% url 'company_product_analyse' product.id %}">Sentiment Analysis</a>
+    </div>
+
+    <script type="application/javascript">
+        $(document).ready(() => {
+            let isDisabled = true;
+            toggleEdit(isDisabled);
+
+            $('#edit-btn').click(() => {
+                isDisabled = !isDisabled;
+                toggleEdit(isDisabled);
+
+                if(isDisabled) {
+                    $('#edit-btn').addClass('btn-primary');
+                    $('#edit-btn').removeClass('btn-secondary');
+                    $('#edit-btn').text('Edit');
+                } else {
+                    $('#edit-btn').removeClass('btn-primary');
+                    $('#edit-btn').addClass('btn-secondary');
+                    $('#edit-btn').text('Cancel');
+                }
+            });
+
+            // ----------------
+
+            function toggleEdit(disabled) {
+                $('input').prop('disabled', disabled);
+                $('select').prop('disabled', disabled);
+                $('textarea').prop('disabled', disabled);
+
+                if(disabled) {
+                    $('button[type=submit]').hide();
+                } else {
+                    $('button[type=submit]').show();
+                }
+            }
+        });
+    </script>
 {% endblock %}
