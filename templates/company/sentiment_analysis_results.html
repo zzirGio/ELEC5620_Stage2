@@ -1,25 +1,71 @@
-{% extends 'base.html' %}
+{% extends 'company/company_dash_base.html' %}
+{% load staticfiles %}
+{% block title %}Add Product{% endblock %}
 
-{% block title %}Sentiment Analysis{% endblock %}
+{% block dash_content %}
+    <style>
+        .result {
+            font-size: x-large;
+            font-weight: 800;
+        }
 
-{% block content %}
-    <h1>Company Sentiment Analysis</h1>
+        .positive {
+            color: #208944;
+        }
 
-    {% if num_reviews > 0 %}
-        <p><strong>Overall sentiment</strong>: {{ sentiment }}</p>
-        <p><strong>Confidence</strong>: {{ confidence }}</p>
+        .negative {
+            color: #A23E48;
+        }
 
-        <p>based on the following reviews:</p>
-        <ul>
-            {% for r in reviews %}
-            <li><strong>{{ r.content }}</strong></li>
-            {% endfor %}
-            <li><a href="{% url 'company_reviews' %}">View all</a></li>
-        </ul>
-    {% else %}
-        <h2>No reviews to analyse.</h2>
-    {% endif %}
+        .table {
+            margin-top: 50px;
+        }
+    </style>
 
+    <div class="container">
+        <h2>Company Sentiment Analysis</h2>
 
-  <p><a href="{% url 'company_dashboard' %}">back</a></p>
+        {% if num_reviews > 0 %}
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>
+                        <strong>Overall sentiment</strong>
+                    </td>
+                    <td>
+                        {% if sentiment == 'positive' %}
+                            <span class="result positive">{{ sentiment }}</span>
+                        {% else %}
+                            <span class="result negative">{{ sentiment }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Confidence</strong>
+                    </td>
+                    <td>
+                        <span class="result">{{ confidence }}</span>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <p>Based on the following reviews:</p>
+            <ul>
+                {% for r in reviews %}
+                    {% if r.user %}
+                            <li><strong>{{ r.user }}</strong>: {{ r.content }}</li>
+                        {% else %}
+                            <li><strong>Anonymous</strong>: {{ r.content }}</li>
+                        {% endif %}
+                {% endfor %}
+            </ul>
+            <a href="{% url 'company_reviews' %}" class="btn btn-primary">View all</a>
+        {% else %}
+            <h2>No reviews to analyse.</h2>
+        {% endif %}
+    </div>
 {% endblock %}
