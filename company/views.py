@@ -32,7 +32,9 @@ class CompanyReviewsView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         company = Company.objects.get(user=self.request.user)
-        context['reviews'] = company.get_reviews()
+        reviews = company.get_reviews()
+        context['num_reviews'] = len(reviews.values_list())
+        context['reviews'] = reviews
         return context
 
 
@@ -46,7 +48,7 @@ class AnalyseCompanyView(generic.TemplateView):
         reviews = company.get_reviews()
         sentiment_analysis = SentimentAnalysis()
         sentiment_result = sentiment_analysis.analyse(reviews)
-        context['num_reviews'] = len(reviews)
+        context['num_reviews'] = len(reviews.values_list())
         context['reviews'] = reviews[0:2]
         context['sentiment'] = sentiment_result.sentiment
         context['confidence'] = sentiment_result.confidence
