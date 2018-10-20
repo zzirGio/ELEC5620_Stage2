@@ -21,9 +21,9 @@ from daintree.views import signup, logged_in
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
-    path('daintree/', include('django.contrib.auth.urls')),
-    path('daintree/signup', signup, name='signup'),
-    path('daintree/logged_in', logged_in, name='logged_in'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup', signup, name='signup'),
+    path('accounts/logged_in', logged_in, name='logged_in'),
     path('company/', include('company.urls')),
     path('customer/', include('customer.urls')),
     path('investor/', include('investor.urls')),
