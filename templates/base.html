@@ -26,10 +26,10 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'logged_in' %}">Dashboard</a></li>
             {% else %}
                 <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Register</a></li>
             {% endif %}
-            <li class="nav-item"><a class="nav-link" href="#">Companies</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Companies</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'products_list' %}">Products</a></li>
             <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
         </ul>
