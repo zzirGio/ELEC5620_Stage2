@@ -13,7 +13,7 @@ def logged_in(request):
     if user_type == 1:
         print('COMPANY USER LOGGED IN!!!')
         return redirect('company_dashboard')
-    # elif(user_type == 2):
-    #     return redirect('customer_dashboard')
-    # elif(user_type == 3):
-    #     return redirect('investor_dashboard')
+    elif(user_type == 2):
+        return redirect('customer_dashboard')
+    elif(user_type == 3):
+        return redirect('investor_dashboard')
