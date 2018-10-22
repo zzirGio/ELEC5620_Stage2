@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from daintree.views import signup, logged_in
+from daintree.views import signup, logged_in, companies_list, products_list
+
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
@@ -27,4 +28,6 @@ urlpatterns = [
     path('company/', include('company.urls')),
     path('customer/', include('customer.urls')),
     path('investor/', include('investor.urls')),
+    path('companies/', companies_list, name='companies_list'),
+    path('products/', products_list, name='products_list'),
 ]
