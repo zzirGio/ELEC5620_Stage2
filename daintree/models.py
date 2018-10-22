@@ -54,6 +54,22 @@ class Category(models.Model):
         return u'{0}'.format(self.name)
 
 
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return u'{}'.format(self.user_id)
+
+
+class Investor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    fundId = models.CharField(max_length=32)
+
+    def __str__(self):
+        return u'{}, {}'.format(self.user_id, self.fundId)
+
+
 class Product(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
