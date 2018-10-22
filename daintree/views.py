@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 
 from daintree.models import Company, Product
@@ -23,9 +23,39 @@ def logged_in(request):
 
 def companies_list(request):
     companies = Company.objects.all().select_related('user').order_by('user__username')
+
+    query = request.GET.get("companySearchTerm")
+    if query:
+        companies = companies.filter(user__username__icontains=query)
+
+    paginator = Paginator(companies, 2)  # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        companies = paginator.page(page)
+    except PageNotAnInteger:
+        companies = paginator.page(1)
+    except EmptyPage:
+        companies = paginator.page(paginator.num_pages)
+
     return render(request, 'companies.html', {'companies': companies})
 
 
 def products_list(request):
     products = Product.objects.all().select_related('company').order_by('name')
+
+    query = request.GET.get("productSearchTerm")
+    if query:
+        products = products.filter(name__icontains=query)
+
+    paginator = Paginator(products, 2)  # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     return render(request, 'products.html', {'products': products})
