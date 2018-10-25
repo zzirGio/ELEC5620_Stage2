@@ -11,7 +11,7 @@
 
     {% load staticfiles %}
    <link rel="stylesheet" href="{% static "css/nav.css" %}">
-   <link rel="stylesheet" href="{% static "css/base.css" %}">
+   <link rel="stylesheet" href="{% static "css/bass.css" %}">
 </head>
 <body>
   <main>
@@ -25,19 +25,32 @@
             {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'logged_in' %}">Dashboard</a></li>
             {% else %}
-                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Register</a></li>
             {% endif %}
             <li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Companies</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'products_list' %}">Products</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'about_us' %}">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
         </ul>
         {% endblock %}
     </nav>
 
     {% block content %}
     {% endblock %}
+
+      <footer class="page-footer font-small pt-4">
+          <div class="footer-container">
+              <div class="container-fluid text-center text-md-left">
+                  <div class="footer-copyright text-center py-3 footer-item">
+                      © 2018 Copyright: <a href="#"> ELEC5620 Group8 </a>
+                  </div>
+              </div>
+          </div>
+      </footer>
   </main>
 </body>
 </html>

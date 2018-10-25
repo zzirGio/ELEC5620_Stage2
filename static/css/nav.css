@@ -14,3 +14,11 @@ nav .nav-link {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.footer-container {
+    box-shadow: 0px 0px 5px #0f3420;
+}
+
+.footer-item {
+    color: #0f3420;
+}
