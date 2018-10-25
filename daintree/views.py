@@ -15,9 +15,9 @@ def logged_in(request):
     if user_type == 1:
         print('COMPANY USER LOGGED IN!!!')
         return redirect('company_dashboard')
-    elif(user_type == 2):
+    elif user_type == 2:
         return redirect('customer_dashboard')
-    elif(user_type == 3):
+    elif user_type == 3:
         return redirect('investor_dashboard')
 
 
@@ -59,3 +59,11 @@ def products_list(request):
         products = paginator.page(paginator.num_pages)
 
     return render(request, 'products.html', {'products': products})
+
+
+def about_us(request):
+    return render(request, 'about_us.html')
+
+
+def contact_us(request):
+    return render(request, 'contact_us.html')
