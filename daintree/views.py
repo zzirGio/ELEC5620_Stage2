@@ -61,6 +61,12 @@ def products_list(request):
     return render(request, 'products.html', {'products': products})
 
 
+def product_info(request, id):
+    product = Product.objects.get(pk=id)
+    reviews = product.get_reviews()
+    return render(request, 'product_info.html', {'product': product, 'reviews': reviews})
+
+
 def about_us(request):
     return render(request, 'about_us.html')
 

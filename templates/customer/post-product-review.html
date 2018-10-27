@@ -1,0 +1,16 @@
+{% extends 'customer/customer_dash_base.html' %}
+{% load staticfiles %}
+
+{% block title %} Customer Dashboard {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/customer/dashboard.css" %}">
+    <div class="review-form-page">
+        <h1>New Review</h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
+{% endblock %}

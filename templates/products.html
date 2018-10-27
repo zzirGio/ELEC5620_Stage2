@@ -27,8 +27,10 @@
 
     {% for product in products %}
         <div class="product-item card">
-            <div class=""card-body>
-                <h3 class="card-title">{{ product.name }}</h3>
+            <div class="card-body">
+                <a href="{% url 'product_info' product.id %}">
+                    <h3 class="card-title">{{ product.name }}</h3>
+                </a>
                 <h4 class="card-subtitle">{{ product.company.user.username }}</h4>
                 <p class="card-text text-truncate">{{ product.description }}</p>
             </div>

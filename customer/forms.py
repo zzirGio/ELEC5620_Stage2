@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from daintree.models import User
 from django.db import transaction
 
-from daintree.models import Customer, UserTypes
+from daintree.models import Customer, UserTypes, Review, ReviewTypes
 
 
 class CustomerSignUpForm(UserCreationForm):
@@ -27,3 +27,8 @@ class CustomerSignUpForm(UserCreationForm):
             customer.save()
 
         return user
+
+class ProductReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('content',)
