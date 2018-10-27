@@ -1,0 +1,8 @@
+{% extends "investor/investor_dash_base.html" %}
+{% load staticfiles %}
+
+{% block title %}Analyse Company{% endblock %}
+
+{% block content %}
+    {% include "components/companies_list.html" with analyse="true"%}
+{% endblock %}

@@ -6,53 +6,8 @@
 {% block content %}
     <h2>List of companies</h2>
 
-    <div class="row justify-content-center" id="company-search-bar">
-        <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="col-auto">
-                        <i class="fas fa-search h4 text-body"></i>
-                    </div>
-                    <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search"
-                               name="companySearchTerm" placeholder="Search a company"
-                               value="{{ request.GET.companySearchTerm }}">
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-success" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    {% for company in companies %}
-        <div class="company-item card">
-            <div class=""card-body>
-                <a href="{% url 'company_info' company.user.id %}">
-                    <h3 class="card-title">{{ company.user.username }}</h3>
-                </a>
-                <p class="card-text text-truncate">{{ company.description }}</p>
-            </div>
-        </div>
-    {% endfor %}
-
-    <div class="pagination">
-        <span class="step-links">
-            {% if companies.has_previous %}
-                <a href="?page={{ companies.previous_page_number }}{% if request.GET.companySearchTerm %}
-                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}">Previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ companies.number }} of {{ companies.paginator.num_pages }}
-            </span>
-
-            {% if companies.has_next %}
-                <a href="?page={{ companies.next_page_number }}{% if request.GET.companySearchTerm %}
-                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}">Next</a>
-            {% endif %}
-        </span>
-    </div>
+    {% block companiesList %}
+        {% include "components/companies_list.html" with analyse="false" %}
+    {% endblock %}
 
 {% endblock %}
