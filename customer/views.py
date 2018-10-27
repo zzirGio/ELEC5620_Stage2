@@ -54,3 +54,18 @@ def post_product_review(request, product_id):
     else:
         form = ProductReviewForm()
     return render(request, 'customer/post-product-review.html', {'form': form, 'product': Product.objects.get(pk=product_id)})
+
+def post_company_review(request, company_id):
+    if request.method == "POST":
+        review = ProductReviewForm(request.POST)
+        if review.is_valid():
+            review = review.save(commit=False)
+            review.user = request.user
+            review.product = None
+            review.company = Company.objects.get(pk=company_id)
+            review.review_type = ReviewTypes.COMPANY
+            review.save()
+            return redirect('company_info', id=company_id)
+    else:
+        form = ProductReviewForm()
+    return render(request, 'customer/post-product-review.html', {'form': form, 'company': Company.objects.get(pk=company_id)})

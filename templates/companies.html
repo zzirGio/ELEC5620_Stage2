@@ -29,7 +29,9 @@
     {% for company in companies %}
         <div class="company-item card">
             <div class=""card-body>
-                <h3 class="card-title">{{ company.user.username }}</h3>
+                <a href="{% url 'company_info' company.user %}">
+                    <h3 class="card-title">{{ company.name }}</h3>
+                </a>
                 <h4 class="card-subtitle">{{ company.category }}</h4>
                 <p class="card-text text-truncate">{{ company.description }}</p>
             </div>
