@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .decorators import customer_user_required
-from .forms import CustomerSignUpForm, ProductReviewForm
+from .forms import CustomerSignUpForm, ProductReviewForm, CompanyReviewForm
 from daintree.models import User, ReviewTypes, Product, Company
 
 
@@ -50,14 +50,14 @@ def post_product_review(request, product_id):
             review.company = review.product.company
             review.review_type = ReviewTypes.PRODUCT
             review.save()
-            return redirect('product_info', id=product_id)
+            return redirect('product_info', product_id=product_id)
     else:
         form = ProductReviewForm()
     return render(request, 'customer/post-product-review.html', {'form': form, 'product': Product.objects.get(pk=product_id)})
 
 def post_company_review(request, company_id):
     if request.method == "POST":
-        review = ProductReviewForm(request.POST)
+        review = CompanyReviewForm(request.POST)
         if review.is_valid():
             review = review.save(commit=False)
             review.user = request.user
@@ -65,7 +65,7 @@ def post_company_review(request, company_id):
             review.company = Company.objects.get(pk=company_id)
             review.review_type = ReviewTypes.COMPANY
             review.save()
-            return redirect('company_info', id=company_id)
+            return redirect('company_info', company_id=company_id)
     else:
-        form = ProductReviewForm()
+        form = CompanyReviewForm()
     return render(request, 'customer/post-product-review.html', {'form': form, 'company': Company.objects.get(pk=company_id)})

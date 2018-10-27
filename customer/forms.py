@@ -32,3 +32,8 @@ class ProductReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('content',)
+
+class CompanyReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('content',)

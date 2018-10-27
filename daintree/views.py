@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 
-from daintree.models import Company, Product, User
+from daintree.models import Company, Product, User, UserTypes
 
 
 def signup(request):

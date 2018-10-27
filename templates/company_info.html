@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block title %}Product Info{% endblock %}
+{% block title %}Company Info{% endblock %}
 
 {% block content %}
-    <h2> {{ product.name }} </h2>
     <h3> {{ company.name }} </h3>
-    <p> {{ product.description }}</p>
+    <p> {{ company.description }}</p>
     <!-- checks whether the user is a customer-->
     {% if user.is_authenticated and user.user_type == 2 %}
-        <a href="{% url 'post_product_review' product.id %}" ><p>Post Review</p></a>
+        <a href="{% url 'post_company_review' company.user.id %}" ><p>Post Review</p></a>
     {% endif %}
 
     <h2>Reviews</h2>
