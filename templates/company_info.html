@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Company Info{% endblock %}
+
+{% block content %}
+    <h3> {{ company.name }} </h3>
+    <p> {{ company.description }}</p>
+    <!-- checks whether the user is a customer-->
+    {% if user.is_authenticated and user.user_type == 2 %}
+        <a href="{% url 'post_company_review' company.user.id %}" ><p>Post Review</p></a>
+    {% endif %}
+
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-text text-truncate">{{ review.user.username }}</h5>
+                <p class="card-text text-truncate">{{ review.content }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No results.</p>
+    {% endfor %}
+{% endblock %}

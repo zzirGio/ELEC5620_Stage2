@@ -9,11 +9,11 @@
     <div class="dashboard-page">
         <h1>Customer Dashboard</h1>
         <div class="flex-container task-card-container">
-            <div class="task-card" onclick="location.href = '{% url 'customer_search_product' %}';">
+            <div class="task-card" onclick="location.href = '{% url 'products_list' %}';">
                 <span class="fa-icon"><i class="fas fa-shopping-cart"></i></span>
                 <p class="title">Search Product</p>
             </div>
-            <div class="task-card" onclick="location.href = '{% url 'customer_search_company' %}';">
+            <div class="task-card" onclick="location.href = '{% url 'companies_list' %}';">
                 <span class="fa-icon"><i class="fas fa-building"></i></span>
                 <p class="title">Search Company</p>
             </div>

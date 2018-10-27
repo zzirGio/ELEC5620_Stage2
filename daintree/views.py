@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 
-from daintree.models import Company, Product
+from daintree.models import Company, Product, User, UserTypes
 
 
 def signup(request):
@@ -59,6 +59,20 @@ def products_list(request):
         products = paginator.page(paginator.num_pages)
 
     return render(request, 'products.html', {'products': products})
+
+
+def product_info(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    reviews = product.get_reviews()
+    return render(request, 'product_info.html',
+                  {'product': product, 'reviews': reviews})
+
+
+def company_info(request, company_id):
+    company = Company.objects.get(pk=company_id)
+    reviews = company.get_reviews()
+    return render(request, 'company_info.html',
+                  {'company': company, 'reviews': reviews})
 
 
 def about_us(request):

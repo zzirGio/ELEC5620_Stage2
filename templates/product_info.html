@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}Product Info{% endblock %}
+
+{% block content %}
+    <h2> {{ product.name }} </h2>
+    <h3> {{ company.name }} </h3>
+    <p> {{ product.description }}</p>
+    <!-- checks whether the user is a customer-->
+    {% if user.is_authenticated and user.user_type == 2 %}
+        <a href="{% url 'post_product_review' product.id %}" ><p>Post Review</p></a>
+    {% endif %}
+
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-text text-truncate">{{ review.user.username }}</h5>
+                <p class="card-text text-truncate">{{ review.content }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No results.</p>
+    {% endfor %}
+{% endblock %}
