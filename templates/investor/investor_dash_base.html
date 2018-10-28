@@ -4,13 +4,42 @@
 {% block links %}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="{% url 'investor_dashboard' %}">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'investor_companies' %}">Companies</a></li>
-        <li class="nav-item"><a class="nav-link" href="{%  url 'investor_products' %}">Products</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Investments</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Companies</a></li>
+        <li class="nav-item"><a class="nav-link" href="{%  url 'products_list' %}">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Sentiment Analysis</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
     </ul>
 {% endblock %}
 
 {% block content %}
 
+    {% block investor_content %}
+    {% endblock %}
+
 {% endblock %}
+
+	<!-- Section -->
+  
+    <header class="major">
+        <h2>Investments List</h2>
+    </header>
+    <div class="features">
+        <article>
+            <span class="icon fa-diamond"></span>
+            <div class="content">
+               <h3> <li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Company inverstment</a></li></h3>
+                <p>We focus on investing in Australian companies with unique high quality assets, brands and/or businesses that can withstand economic cycles. Our view is that such businesses will generate superior returns over the long term.</p>
+            </div>
+        </article>
+        <article>
+            <span class="icon fa-paper-plane"></span>
+            <div class="content">
+                <h3><li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Products inverstment</a></li></h3>
+                <p>Our service meets all the needs of the modern investor. Low transaction costs, stock filter tools and its "one-second guarantee" for at-market trades ensures investors have all the features they need without paying for functions they don't.</p>
+            </div>
+        </article>
+       
+    </div>
+</section>
+
+<!-- Section -->
