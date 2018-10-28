@@ -59,6 +59,17 @@ class AnalyseCompanyView(generic.TemplateView):
 class AddProductSuccessView(generic.TemplateView):
     template_name = 'company/product_saved_success.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return_url = self.request.META.get('HTTP_REFERER')
+        context['return_url'] = return_url
+
+        if '/company/add_product' in return_url:
+            context['from_add_products'] = True
+
+        return context
+
 
 @method_decorator([login_required, company_user_required], name='dispatch')
 class AddProductView(generic.CreateView):
