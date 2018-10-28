@@ -1,7 +1,10 @@
+{% load staticfiles %}
+
 {% block companiesList %}
- <div class="row justify-content-center" id="company-search-bar">
-        <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
+    <link rel="stylesheet" href="{% static "css/list.css" %}">
+    <div class="row justify-content-center" id="company-search-bar">
+        <div class="col-12 col-md-10 col-lg-8 w-75">
+            <form class="card card-sm" method="GET">
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col-auto">
                         <i class="fas fa-search h4 text-body"></i>
@@ -9,7 +12,7 @@
                     <div class="col">
                         <input class="form-control form-control-lg form-control-borderless" type="search"
                                name="companySearchTerm" placeholder="Search a company"
-                               value="{{ request.GET.companySearchTerm }}">
+                               value="{% if request.GET.companySearchTerm %}{{ request.GET.companySearchTerm }}{% endif %}">
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-lg btn-success" type="submit">Search</button>
@@ -20,7 +23,7 @@
     </div>
 
     {% for company in companies %}
-        <div class="company-item card">
+        <div class="card company-item mx-auto col-12 col-md-10 col-lg-8">
             <div class="card-body">
                 <a href="{% url 'company_info' company.user.id %}">
                     <h3 class="card-title">{{ company.user.username }}</h3>
@@ -36,21 +39,37 @@
         </div>
     {% endfor %}
 
-    <div class="pagination">
-        <span class="step-links">
+    {% if companies.has_other_pages %}
+    <nav class="pagination-bar">
+        <ul class="pagination justify-content-center">
             {% if companies.has_previous %}
-                <a href="?page={{ companies.previous_page_number }}{% if request.GET.companySearchTerm %}
-                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}">Previous</a>
+                <li class="page-item">
+                    <a href="?page={{ companies.previous_page_number }}{% if request.GET.companySearchTerm %}
+                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}" class="page-link">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
             {% endif %}
 
-            <span class="current">
-                Page {{ companies.number }} of {{ companies.paginator.num_pages }}
-            </span>
+            {% for i in companies.paginator.page_range %}
+                {% if companies.number == i %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ i }}{% if request.GET.companySearchTerm %}
+                        &companiesSearchTerm={{ request.GET.companySearchTerm }}{% endif %}">{{ i }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}{% if request.GET.companySearchTerm %}
+                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
 
             {% if companies.has_next %}
-                <a href="?page={{ companies.next_page_number }}{% if request.GET.companySearchTerm %}
-                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}">Next</a>
+                <li class="page-item">
+                    <a href="?page={{ companies.next_page_number }}{% if request.GET.companiesSearchTerm %}
+                        &companySearchTerm={{ request.GET.companySearchTerm }}{% endif %}" class="page-link">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
+    {% endif %}
 {% endblock %}

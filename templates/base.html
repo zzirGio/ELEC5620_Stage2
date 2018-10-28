@@ -30,8 +30,6 @@
             {% endif %}
             <li class="nav-item"><a class="nav-link" href="{% url 'companies_list' %}">Companies</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'products_list' %}">Products</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'about_us' %}">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a></li>
             {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
             {% endif %}

@@ -5,12 +5,13 @@
 
 {% block content %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/investor/dashboard.css" %}">
 
     <div class="dashboard-page">
         <h1>Investor Dashboard</h1>
         <div class="flex-container task-card-container">
             <div class="task-card" onclick="location.href = '{% url 'investor_products' %}';">
-                <span class="fa-icon"><i class="fas fa-chart-line"></i></span>
+                <span class="fa-icon"><i class="fas fa-chart-bar"></i></span>
                 <p class="title">Products (Sentiment Analysis)</p>
             </div>
             <div class="task-card" onclick="location.href = '{% url 'investor_companies' %}';">
