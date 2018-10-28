@@ -1,0 +1,53 @@
+{% extends 'investor/investor_dash_base.html' %}
+{% load staticfiles %}
+{% block title %}Sentiment Analysis{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/investor/sentiment.css' %}" >
+
+    <div class="container">
+        <h2>Sentiment Analysis for {{ name }}</h2>
+
+        {% if num_reviews > 0 %}
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>
+                        <strong>Overall sentiment</strong>
+                    </td>
+                    <td>
+                        {% if sentiment == 'positive' %}
+                            <span class="result positive">{{ sentiment }}</span>
+                        {% else %}
+                            <span class="result negative">{{ sentiment }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Confidence</strong>
+                    </td>
+                    <td>
+                        <span class="result">{{ confidence }}</span>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <p>Based on the following reviews:</p>
+            <ul>
+                {% for review in reviews %}
+                    {% if review.user %}
+                            <li><strong>{{ review.user }}</strong>: {{ review.content }}</li>
+                        {% else %}
+                            <li><strong>Anonymous</strong>: {{ review.content }}</li>
+                        {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2>No reviews to analyse.</h2>
+        {% endif %}
+    </div>
+{% endblock %}

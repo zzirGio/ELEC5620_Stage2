@@ -28,7 +28,7 @@ def companies_list(request):
     if query:
         companies = companies.filter(user__username__icontains=query)
 
-    paginator = Paginator(companies, 2)  # Show 25 contacts per page
+    paginator = Paginator(companies, 5)
 
     page = request.GET.get('page')
     try:
@@ -48,7 +48,7 @@ def products_list(request):
     if query:
         products = products.filter(name__icontains=query)
 
-    paginator = Paginator(products, 2)  # Show 25 contacts per page
+    paginator = Paginator(products, 5)
 
     page = request.GET.get('page')
     try:

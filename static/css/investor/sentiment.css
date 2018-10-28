@@ -1,0 +1,16 @@
+.result {
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.positive {
+    color: #208944;
+}
+
+.negative {
+    color: #A23E48;
+}
+
+.table {
+    margin-top: 50px;
+}

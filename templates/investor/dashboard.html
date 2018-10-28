@@ -4,5 +4,28 @@
 {% block title %} Investor Dashboard {% endblock %}
 
 {% block content %}
-    <p>You're logged in as investor.</p>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+    <div class="dashboard-page">
+        <h1>Investor Dashboard</h1>
+        <div class="flex-container task-card-container">
+            <div class="task-card" onclick="location.href = '{% url 'investor_products' %}';">
+                <span class="fa-icon"><i class="fas fa-chart-line"></i></span>
+                <p class="title">Products (Sentiment Analysis)</p>
+            </div>
+            <div class="task-card" onclick="location.href = '{% url 'investor_companies' %}';">
+                <span class="fa-icon"><i class="fas fa-chart-line"></i></span>
+                <p class="title">Companies (Sentiment Analysis)</p>
+            </div>
+            <div class="task-card" onclick="location.href ='#';">
+                <span class="fa-icon"><i class="fas fa-dollar-sign"></i></span>
+                <p class="title">Investment</p>
+            </div>
+            <div class="task-card" onclick="location.href = '#';">
+                <span class="fa-icon"><i class="fas fa-plus"></i></span>
+                <p class="title">Add investment</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

@@ -1,0 +1,57 @@
+{% block productsList %}
+    <div class="row justify-content-center" id="product-search-bar">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" method="GET">
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               name="productSearchTerm" placeholder="Search a product">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% for product in products %}
+        <div class="product-item card">
+            <div class="card-body">
+                <a href="{% url 'product_info' product.id %}">
+                    <h3 class="card-title">{{ product.name }}</h3>
+                </a>
+                <h4 class="card-subtitle">{{ product.company.user.username }}</h4>
+                <p class="card-text text-truncate">{{ product.description }}</p>
+                {% if analyse == "true" %}
+                    <a href="{% url 'investor_product_analyse' product.id %}">
+                        <button class="btn btn-info">View Sentiment Analysis</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No results.</p>
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page={{ products.previous_page_number }}{% if request.GET.productSearchTerm %}
+                        &productSearchTerm={{ request.GET.productSearchTerm }}{% endif %}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ products.number }} of {{ products.paginator.num_pages }}
+            </span>
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}{% if request.GET.productSearchTerm %}
+                        &productSearchTerm={{ request.GET.productSearchTerm }}{% endif %}">Next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
