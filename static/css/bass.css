@@ -3,3 +3,16 @@
     max-width: 600px;
     margin: 44px auto;
 }
+
+.shared-content {
+    width: 65%;
+    margin:auto;
+}
+
+.featurette-divider {
+    margin: 3rem 0;
+}
+
+.carousel {
+    margin-bottom: 20px;
+}
