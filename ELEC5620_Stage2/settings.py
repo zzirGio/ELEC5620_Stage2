@@ -27,12 +27,13 @@ AYLIEN_KEY = '7b54a8e4e515fe268f7fd3c29e672a86'
 AYLIEN_ENDPOINT = 'https://api.aylien.com/api/v1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'daintree-django-env.xxdefraqrs.ap-southeast-2.elasticbeanstalk.com',
+    'django-env.5netdaxdsz.ap-southeast-2.elasticbeanstalk.com'
  ]
 
 
