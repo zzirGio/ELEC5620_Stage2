@@ -4,8 +4,9 @@
 {% block title %}Products list{% endblock %}
 
 {% block content %}
-    <h2>List of products</h2>
-
+    <div class="col-12 col-md-10 col-lg-8 w-75 mx-auto heading" style="margin-top:20px;">
+        <h2>List of products</h2>
+    </div>
     {% block productsList %}
         {% include "components/products_list.html" with analyse="false" %}
     {% endblock %}

@@ -4,22 +4,32 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="carousel" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block w-100" src="{% static "img/trade.jpg" %}"/>
+    <link rel="stylesheet" href="{% static "css/bass.css" %}">
+    <div class="carousel" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static "img/trade.jpg" %}"/>
+            </div>
         </div>
     </div>
-</div>
 
-    <div>
+    <div class="container">
         {% if user.is_authenticated %}
-          Hi {{ user.username }}!
-          <p><a href="{% url 'logout' %}">logout</a></p>
+            <div class="alert alert-success" role="alert">
+                Hi {{ user.username }}!
+            </div>
+            <button class="btn btn-default"><a href="{% url 'logout' %}">logout</a></button>
         {% else %}
-          <p>You are not logged in</p>
-          <a href="{% url 'login' %}">login</a> |
-          <a href="{% url 'signup' %}">signup</a>
+            <div class="alert alert-warning" role="alert">
+                You are not logged in
+            </div>
+            <button class="btn btn-default"><a href="{% url 'login' %}">Login</a></button> |
+            <button class="btn btn-default"><a href="{% url 'signup' %}">Signup</a></button>
         {% endif %}
+        <hr class="featurette-divider">
+        {% include "about_us.html" %}
+        <hr class="featurette-divider">
+        {% include "contact_us.html" %}
     </div>
+
 {% endblock %}

@@ -1,0 +1,16 @@
+.card {
+    margin: 30px 0px;
+}
+
+.card-subtitle {
+    font-weight: 300;
+    font-size: 16pt;
+}
+
+.card-text {
+    padding-top: 8px;
+}
+
+.pagination-bar {
+    box-shadow: none !important;
+}

@@ -1,40 +1,37 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
+{% block about %}
+    <div>
+        <h2>About us</h2>
+        <div class="description">
+            <h3>Daintree</h3>
+            <p class="text-justify"><b>Daintree</b> is a sentiment analysis platform which aim to contribute in the stock market and the
+                investment process. It is a platform to connect Companies to the opinion of the customers, in order to
+                improve their product and company performance. The platform also offer an accessible mean for the (potential)
+                investors to get a better understanding and insight of the products and companies they invested in or wish
+                to invest into.
+            </p>
+        </div>
 
-{% block title %}About Us{% endblock %}
+        <div class="history">
+            <h3>Our history</h3>
+            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </p>
+        </div>
 
-{% block content %}
-    <h2>About us</h2>
-    <div class="description">
-        <h3>Daintree</h3>
-        <p><b>Daintree</b> is a sentiment analysis platform which aim to contribute in the stock market and the
-            investment process. It is a platform to connect Companies to the opinion of the customers, in order to
-            improve their product and company performance. The platform also offer an accessible mean for the (potential)
-            investors to get a better understanding and insight of the products and companies they invested in or wish
-            to invest into.
-        </p>
-    </div>
-
-    <div class="history">
-        <h3>Our history</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-        </p>
-    </div>
-
-    <div class="mission">
-        <h3>Our mission</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-        </p>
+        <div class="mission">
+            <h3>Our mission</h3>
+            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </p>
+        </div>
     </div>
 
 {% endblock %}
