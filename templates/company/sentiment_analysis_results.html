@@ -57,7 +57,7 @@
             <ul>
                 {% for r in reviews %}
                     {% if r.user %}
-                            <li><strong>{{ r.user }}</strong>: {{ r.content }}</li>
+                            <li><strong>{{ r.user.username }}</strong>: {{ r.content }}</li>
                         {% else %}
                             <li><strong>Anonymous</strong>: {{ r.content }}</li>
                         {% endif %}
