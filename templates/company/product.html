@@ -22,7 +22,7 @@
     <div class="container">
         <h2>Product</h2>
         <button type="button" class="btn btn-primary float-right" id="edit-btn">Edit</button>
-        <form method="post">
+        <form id="product-form" method="post">
             {% csrf_token %}
             <div class="fieldWrapper form-group row">
                 {{ form.name.errors }}
@@ -67,11 +67,12 @@
     </div>
 
     <script type="application/javascript">
-        $(document).ready(() => {
+        $(document).ready(function() {
+            saveState();
             let isDisabled = true;
             toggleEdit(isDisabled);
 
-            $('#edit-btn').click(() => {
+            $('#edit-btn').click(function() {
                 isDisabled = !isDisabled;
                 toggleEdit(isDisabled);
 
@@ -95,10 +96,26 @@
 
                 if(disabled) {
                     $('button[type=submit]').hide();
+                    restoreState();
                 } else {
                     $('button[type=submit]').show();
+                    saveState();
                 }
             }
+
+            function saveState() {
+                [].forEach.call(document.querySelector('#product-form').elements, function (el) {
+                    localStorage.setItem(el.name, el.value);
+                });
+                console.log('saved!');
+            }
+            function restoreState() {
+                [].forEach.call(document.querySelector('#product-form').elements, function(el) {
+                  el.value = localStorage.getItem(el.name);
+                });
+                console.log('restored!');
+            }
+
         });
     </script>
 {% endblock %}
